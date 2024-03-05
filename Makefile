@@ -11,4 +11,4 @@ lint:
 	poetry run flake8
 
 test-coverage:
-	pytest
+	pytest --cov
