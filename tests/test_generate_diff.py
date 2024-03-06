@@ -1,5 +1,5 @@
 import pytest
-from gendiff.generator import generator_diff
+from gendiff.generator import generate_diff
 
 
 @pytest.mark.parametrize(
@@ -14,4 +14,4 @@ from gendiff.generator import generator_diff
 def test_generator_diff(path_to_file1, path_to_file2, expected_file):
     with open(expected_file, 'r') as expected:
         result = expected.read()
-    assert result == generator_diff(path_to_file1, path_to_file2)
+    assert result == generate_diff(path_to_file1, path_to_file2)
