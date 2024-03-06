@@ -10,5 +10,10 @@ package-install:
 lint:
 	poetry run flake8
 
+test:
+	poetry run pytest
+
 test-coverage:
-	pytest --cov
+	poetry run coverage run -m pytest
+	poetry run coverage xml
+	poetry run coverage report
