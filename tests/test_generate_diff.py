@@ -1,5 +1,5 @@
 import pytest
-from gendiff.generator import generate_diff
+from gendiff.generate import generate_diff
 
 
 @pytest.mark.parametrize(
@@ -13,7 +13,12 @@ from gendiff.generator import generate_diff
         (
             './tests/fixtures/file1_yaml.yaml',
             './tests/fixtures/file2_yaml.yml',
-            './tests/fixtures/expected_yaml.txt'
+            './tests/fixtures/expected.txt'
+        ),
+        (
+            './tests/fixtures/file3.json',
+            './tests/fixtures/file4.json',
+            './tests/fixtures/expected2.txt'
         )
     ]
 )

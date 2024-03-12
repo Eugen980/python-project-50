@@ -1,5 +1,5 @@
 from gendiff.arg_argparse import get_args
-from gendiff.generator import generate_diff
+from gendiff.generate import generate_diff
 
 args = get_args()
 
