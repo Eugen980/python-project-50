@@ -28,6 +28,12 @@ from gendiff.generate import generate_diff
             './tests/fixtures/file4.json',
             'plain',
             './tests/fixtures/expected_plain.txt'
+        ),
+        (
+            './tests/fixtures/file3.json',
+            './tests/fixtures/file4.json',
+            'json',
+            './tests/fixtures/expected_json.txt'
         )
     ]
 )
