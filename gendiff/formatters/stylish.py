@@ -21,7 +21,7 @@ def to_str(value, depth=1):
     return f"{value}"
 
 
-def make_stylish_result(diff, depth=1):
+def get_stylish_result(diff, depth=1):
     indent = SEP * (depth * OFFSET_LEFT - 2)
     lines = []
     for item in diff:
@@ -41,7 +41,7 @@ def make_stylish_result(diff, depth=1):
             case "added":
                 lines.append(f"{indent}{ADD}{key_name}: {new_value}")
             case "nested":
-                children = make_stylish_result(
+                children = get_stylish_result(
                     item.get("children"), depth + 1
                 )
                 lines.append(f"{indent}{NONE}{key_name}: {children}")
@@ -53,4 +53,4 @@ def make_stylish_result(diff, depth=1):
 
 
 def format_stylish(data):
-    return make_stylish_result(data)
+    return get_stylish_result(data)
