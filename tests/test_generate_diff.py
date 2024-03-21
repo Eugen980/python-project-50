@@ -2,6 +2,11 @@ import pytest
 from gendiff.generate import generate_diff
 
 
+def get_fixtures_data(path_to_file):
+    with open(path_to_file, 'r') as expected:
+        return expected.read()
+
+
 @pytest.mark.parametrize(
     ['path_to_file1', 'path_to_file2', 'formatter', 'expected_file'],
     [
@@ -38,6 +43,5 @@ from gendiff.generate import generate_diff
     ]
 )
 def test_generator_diff(path_to_file1, path_to_file2, formatter, expected_file):
-    with open(expected_file, 'r') as expected:
-        result = expected.read()
+    result = get_fixtures_data(expected_file)
     assert result == generate_diff(path_to_file1, path_to_file2, formatter)

@@ -29,11 +29,11 @@ def get_plain_result_item(item, path=''):
         )
     if action == 'nested':
         children = item.get('children')
-        return get_plain_result(children, current_path)
+        return format_plain(children, current_path)
     return None
 
 
-def get_plain_result(diff, path=''):
+def format_plain(diff, path=''):
     result = []
     for item in diff:
         formatted_item = get_plain_result_item(item, path)
@@ -41,7 +41,3 @@ def get_plain_result(diff, path=''):
             result.append(formatted_item)
 
     return '\n'.join(result)
-
-
-def format_plain(data):
-    return get_plain_result(data)
