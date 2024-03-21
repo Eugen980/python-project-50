@@ -32,4 +32,4 @@ Example: gendiff ./tests/fixtures/file3.json ./tests/fixtures/file4.json -f plai
 
 ### Demonstration of the work
 
-![asciicast](https://asciinema.org/a/Bde944UaasXjRr5eaHe8D4KK9.svg)
+[![asciicast](https://asciinema.org/a/Bde944UaasXjRr5eaHe8D4KK9.svg)](https://asciinema.org/a/Bde944UaasXjRr5eaHe8D4KK9)
