@@ -4,9 +4,12 @@ from gendiff.formatters.json import format_json
 
 
 def format_diff(diff, formatter):
-    if formatter == 'stylish':
-        return format_stylish(diff)
-    if formatter == 'plain':
-        return format_plain(diff)
-    if formatter == 'json':
-        return format_json(diff)
+    match formatter:
+        case 'stylish':
+            return format_stylish(diff)
+        case 'json':
+            return format_json(diff)
+        case 'plain':
+            return format_plain(diff)
+        case _:
+            raise ValueError(f'Invalid format {formatter}')
