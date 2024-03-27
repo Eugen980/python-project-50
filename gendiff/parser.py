@@ -1,12 +1,13 @@
 import yaml
 import json
+from gendiff.consts import DATA_FORMATS
 
 
 def parse_data(extension, data):
     match extension:
-        case '.json':
+        case DATA_FORMATS.JSON:
             return json.loads(data)
-        case '.yaml' | '.yml':
+        case DATA_FORMATS.YML | DATA_FORMATS.YAML:
             return yaml.safe_load(data)
         case _:
-            raise NameError('Invalid file format')
+            raise TypeError('Invalid file format')

@@ -1,3 +1,6 @@
+from gendiff.consts import DIFF_TYPES
+
+
 def to_str(value):
     if isinstance(value, (list, dict)):
         return '[complex value]'
@@ -12,25 +15,30 @@ def to_str(value):
 
 
 def get_plain_result_item(item, path=''):
-    current_key = item.get('name')
-    current_path = f"{path}.{current_key}" if path else current_key
+    actual_key = item.get('name')
+    actual_path = f"{path}.{actual_key}" if path else actual_key
     action = item.get('action')
     new_value = to_str(item.get('new_value'))
     old_value = to_str(item.get('old_value'))
 
-    if action == 'added':
-        return f"Property '{current_path}' was added with value: {new_value}"
-    if action == 'deleted':
-        return f"Property '{current_path}' was removed"
-    if action == 'modified':
-        return (
-            f"Property '{current_path}' was updated. "
-            f"From {old_value} to {new_value}"
-        )
-    if action == 'nested':
-        children = item.get('children')
-        return format_plain(children, current_path)
-    return None
+    match action:
+        case DIFF_TYPES.ADDED:
+            return f"Property '{actual_path}' was added with value: {new_value}"
+        case DIFF_TYPES.DELETED:
+            return f"Property '{actual_path}' was removed"
+        case DIFF_TYPES.MODIFIED:
+            return (
+                f"Property '{actual_path}' was updated. "
+                f"From {old_value} to {new_value}"
+            )
+        case DIFF_TYPES.NESTED:
+            children = item.get('children')
+            return format_plain(children, actual_path)
+        case DIFF_TYPES.UNCHANGED:
+            pass
+        case _:
+            raise TypeError
+    return
 
 
 def format_plain(diff, path=''):

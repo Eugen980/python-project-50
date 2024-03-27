@@ -1,4 +1,4 @@
-from gendiff.consts import ADD, DEL, NONE, OFFSET_LEFT, SEP
+from gendiff.consts import ADD, DEL, OFFSET_LEFT, SEP, DIFF_TYPES
 
 
 def to_str(value, depth=1):
@@ -14,7 +14,7 @@ def to_str(value, depth=1):
                 inner_value,
                 depth + 1
             )
-            lines.append(f"{indent}{NONE}{key}: {formatted_value}")
+            lines.append(f"{indent}  {key}: {formatted_value}")
         formatted_string = '\n'.join(lines)
         end_indent = SEP * depth * OFFSET_LEFT
         return f"{{\n{formatted_string}\n{end_indent}}}"
@@ -30,21 +30,21 @@ def format_stylish(diff, depth=1):
         new_value = to_str(item.get("new_value"), depth)
         action = item["action"]
         match action:
-            case "unchanged":
+            case DIFF_TYPES.UNCHANGED:
                 current_value = to_str(item.get("value"), depth)
-                lines.append(f"{indent}{NONE}{key_name}: {current_value}")
-            case "modified":
-                lines.append(f"{indent}{DEL}{key_name}: {old_value}")
-                lines.append(f"{indent}{ADD}{key_name}: {new_value}")
-            case "deleted":
-                lines.append(f"{indent}{DEL}{key_name}: {old_value}")
-            case "added":
-                lines.append(f"{indent}{ADD}{key_name}: {new_value}")
-            case "nested":
+                lines.append(f"{indent}  {key_name}: {current_value}")
+            case DIFF_TYPES.MODIFIED:
+                lines.append(f"{indent}{DEL} {key_name}: {old_value}")
+                lines.append(f"{indent}{ADD} {key_name}: {new_value}")
+            case DIFF_TYPES.DELETED:
+                lines.append(f"{indent}{DEL} {key_name}: {old_value}")
+            case DIFF_TYPES.ADDED:
+                lines.append(f"{indent}{ADD} {key_name}: {new_value}")
+            case DIFF_TYPES.NESTED:
                 children = format_stylish(
                     item.get("children"), depth + 1
                 )
-                lines.append(f"{indent}{NONE}{key_name}: {children}")
+                lines.append(f"{indent}  {key_name}: {children}")
 
     formatted_string = '\n'.join(lines)
     end_indent = SEP * (depth * OFFSET_LEFT - 4)

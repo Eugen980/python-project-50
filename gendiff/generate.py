@@ -6,7 +6,7 @@ from gendiff.formatters import format_diff
 
 def get_extension_file(path_to_file):
     file_name, file_extension = os.path.splitext(path_to_file)
-    return file_extension
+    return file_extension[1:]
 
 
 def get_data_from_file(path_to_file):
