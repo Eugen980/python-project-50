@@ -2,46 +2,23 @@ import pytest
 from gendiff.generate import generate_diff
 
 
-def get_fixtures_data(path_to_file):
-    with open(path_to_file, 'r') as expected:
+def get_fixtures_data(file):
+    with open(get_path(file), 'r') as expected:
         return expected.read()
 
 
+def get_path(filename):
+    return f'./tests/fixtures/{filename}'
+
+
 @pytest.mark.parametrize(
-    ['path_to_file1', 'path_to_file2', 'formatter', 'expected_file'],
+    ['file1', 'file2'],
     [
-        (
-            './tests/fixtures/file1.json',
-            './tests/fixtures/file2.json',
-            'stylish',
-            './tests/fixtures/expected.txt'
-        ),
-        (
-            './tests/fixtures/file1_yaml.yaml',
-            './tests/fixtures/file2_yaml.yml',
-            'stylish',
-            './tests/fixtures/expected.txt'
-        ),
-        (
-            './tests/fixtures/file3.json',
-            './tests/fixtures/file4.json',
-            'stylish',
-            './tests/fixtures/expected2.txt'
-        ),
-        (
-            './tests/fixtures/file3.json',
-            './tests/fixtures/file4.json',
-            'plain',
-            './tests/fixtures/expected_plain.txt'
-        ),
-        (
-            './tests/fixtures/file3.json',
-            './tests/fixtures/file4.json',
-            'json',
-            './tests/fixtures/expected_json.txt'
-        )
+        (get_path('file3.json'), get_path('file4.json'))
     ]
 )
-def test_generator_diff(path_to_file1, path_to_file2, formatter, expected_file):
-    result = get_fixtures_data(expected_file)
-    assert result == generate_diff(path_to_file1, path_to_file2, formatter)
+def test_generator_diff(file1, file2):
+    assert get_fixtures_data('expected2') == generate_diff(file1, file2)
+    assert get_fixtures_data('expected2') == generate_diff(file1, file2, formatter='stylish')    # noqa: E501
+    assert get_fixtures_data('expected_json') == generate_diff(file1, file2, formatter='json')    # noqa: E501
+    assert get_fixtures_data('expected_plain') == generate_diff(file1, file2, formatter='plain')    # noqa: E501

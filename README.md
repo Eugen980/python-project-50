@@ -1,35 +1,56 @@
-### Hexlet tests and linter status:
+## Hexlet tests and linter status:
 [![Actions Status](https://github.com/Eugen980/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Eugen980/python-project-50/actions) 
 [![Maintainability](https://api.codeclimate.com/v1/badges/389cedbb3a332ed67399/maintainability)](https://codeclimate.com/github/Eugen980/python-project-50/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/389cedbb3a332ed67399/test_coverage)](https://codeclimate.com/github/Eugen980/python-project-50/test_coverage)
 
 
-### Differences generator 
+## Differences generator 
 
-The difference generator is a program that looks for differences between two files. Supports two types of files for definition - json and yaml. It has three types of output - stylish, plain, and json.
+The difference generator is a program that looks for differences between two files. Supports two types of files for definition - ``json`` and ``yaml``. It has three types of output - ``stylish``, ``plain``, and ``json``.
 
-### Installation
+## Installation
 
 Download the game and install from root directory 
 To install the game from the repository,
-use the command python3 -m pip install --user git+https://github.com/Eugen980/python-project-50.git
+use the command ``python3 -m pip install --user git+https://github.com/Eugen980/python-project-50.git``
 
-### Uninstallation
+## Uninstallation
 
-To delete it, use the command pip uninstall hexlet-code
+To delete it, use the command ``pip uninstall hexlet-code``
 
-### The work of the program
+## The work of the program
 
-To output help, use the gendiff -h or --help command
+To output help, use the ``gendiff -h`` or ``--help`` command:
+
+>usage: gendiff.py [-h] [-f FORMAT] first_file second_file
+>
+>Compares two configuration files and shows a difference.
+>
+>positional arguments:
+>  first_file
+>  second_file
+>
+>options:
+>  -h, --help            show this help message and exit
+>  -f FORMAT, --format FORMAT
+>                        select format of output from [stylish, plain, json]
 
 To start the program, enter "gendiff" and the full paths for the files being compared
 Example: gendiff ./tests/fixtures/file3.json ./tests/fixtures/file4.json
 
-To select the output type, use the -f option with the format you need
+To select the output type, use the ``-f`` option with the format you need
 
-Example: gendiff ./tests/fixtures/file3.json ./tests/fixtures/file4.json -f plain
+``Example: gendiff ./tests/fixtures/file3.json ./tests/fixtures/file4.json -f plain``
 
+## Technology
 
-### Demonstration of the work
+- Python 3.10
+- Pyyaml
+- Poetry
+
+### Requirements
+To install and run the project, you need [Pyyaml](https://pypi.org/project/PyYAML/), [poetry](https://python-poetry.org/)
+
+## Demonstration of the work
 
 [![asciicast](https://asciinema.org/a/Bde944UaasXjRr5eaHe8D4KK9.svg)](https://asciinema.org/a/Bde944UaasXjRr5eaHe8D4KK9)
