@@ -1,5 +1,6 @@
 import pytest
 from gendiff.generate import generate_diff
+from gendiff.consts import FORMATS
 
 
 def get_fixtures_data(file):
@@ -14,11 +15,11 @@ def get_path(filename):
 @pytest.mark.parametrize(
     ['file1', 'file2'],
     [
-        (get_path('file3.json'), get_path('file4.json'))
+        ('file1.json', 'file2.json')
     ]
 )
 def test_generator_diff(file1, file2):
-    assert get_fixtures_data('expected2') == generate_diff(file1, file2)
-    assert get_fixtures_data('expected2') == generate_diff(file1, file2, formatter='stylish')    # noqa: E501
-    assert get_fixtures_data('expected_json') == generate_diff(file1, file2, formatter='json')    # noqa: E501
-    assert get_fixtures_data('expected_plain') == generate_diff(file1, file2, formatter='plain')    # noqa: E501
+    assert get_fixtures_data('expected_stylish') == generate_diff(get_path(file1), get_path(file2))    # noqa: E501
+    assert get_fixtures_data('expected_stylish') == generate_diff(get_path(file1), get_path(file2), formatter=FORMATS.STYLISH)    # noqa: E501
+    assert get_fixtures_data('expected_json') == generate_diff(get_path(file1), get_path(file2), formatter=FORMATS.JSON)    # noqa: E501
+    assert get_fixtures_data('expected_plain') == generate_diff(get_path(file1), get_path(file2), formatter=FORMATS.PLAIN)    # noqa: E501

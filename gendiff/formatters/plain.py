@@ -38,7 +38,6 @@ def get_plain_result_item(item, path=''):
             pass
         case _:
             raise TypeError
-    return
 
 
 def format_plain(diff, path=''):
